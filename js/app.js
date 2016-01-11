@@ -41,6 +41,10 @@ var Cell = React.createClass({
 });
 
 var Knight = React.createClass({
+  propTypes: {
+    position: PropTypes.arrayOf(PropTypes.number)
+  },
+
   render: function() {
     return(
       <span><img src="/public/images/knight.png" height="80" width="80"/></span>
@@ -55,7 +59,7 @@ var UnleaseChess = React.createClass({
         <Header />
         <ChessBoard>
           <Cell grey>
-            <Knight />
+            <Knight position={[0, 0]}/>
           </Cell>
         </ChessBoard>
       </div>
