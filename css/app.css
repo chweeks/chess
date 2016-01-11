@@ -1,3 +1,25 @@
 h1, h2, h3, h4, h5, h6 {
-      text-align: center;
-  }
+  text-align: center;
+}
+
+header{
+  margin-bottom: 4%;
+}
+
+.board{
+  margin:auto;
+  width: 806px;
+  height: 806px;
+  border: solid;
+  border-color: grey;
+  line-height: 0px;
+}
+
+.cell{
+  width: 100px;
+  height: 100px;
+  border: solid;
+  border-width: 2px;
+  border-color: grey;
+  display: inline-flex;
+}
