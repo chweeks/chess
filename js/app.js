@@ -1,5 +1,7 @@
 'use strict';
 
+var PropTypes = React.PropTypes;
+
 var Header = React.createClass({
   render: function() {
     return (
@@ -21,14 +23,22 @@ var ChessBoard = React.createClass({
 });
 
 var Cell = React.createClass({
+
+  propTypes: {
+    grey: PropTypes.bool
+  },
+
   render: function() {
-    return (
-      <div className="greyCell" id="A1">
+    var grey = this.props.grey;
+    var colour = grey ? "grey" : "white"
+
+    return(
+      <div className= {colour}>
         {this.props.children}
       </div>
-    )
+    );
   }
-})
+});
 
 var Knight = React.createClass({
   render: function() {
@@ -44,7 +54,7 @@ var UnleaseChess = React.createClass({
       <div className="container">
         <Header />
         <ChessBoard>
-          <Cell>
+          <Cell grey>
             <Knight />
           </Cell>
         </ChessBoard>

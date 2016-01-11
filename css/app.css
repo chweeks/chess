@@ -15,7 +15,7 @@ header{
   line-height: 0px;
 }
 
-.greyCell{
+.grey{
   width: 100px;
   height: 100px;
   padding-left: 6px;
@@ -28,7 +28,7 @@ header{
   display: inline-flex;
 }
 
-.whiteCell{
+.white{
   width: 100px;
   height: 100px;
   border: solid;
