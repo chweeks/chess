@@ -35,7 +35,7 @@ var Cells = React.createClass({
 
     var colour = grey ? "grey" : "white"
 
-    return(
+    return (
       <div key={i} className={colour}>
         {this.props.children}
       </div>
@@ -44,13 +44,13 @@ var Cells = React.createClass({
 
   render: function() {
     var cells = []
-      for(var i=0; i<64; i++){
-        cells.push(this.createCell(i))
-      }
-      return(
-        <div>
-          {cells}
-        </div>
+    for(var i=0; i<64; i++){
+      cells.push(this.createCell(i))
+    };
+    return (
+      <div>
+        {cells}
+      </div>
     );
   }
 });
@@ -61,7 +61,7 @@ var Knight = React.createClass({
   },
 
   render: function() {
-    return(
+    return (
       <span><img src="/public/images/knight.png" height="80" width="80"/></span>
     );
   }
