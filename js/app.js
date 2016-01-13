@@ -22,20 +22,35 @@ var ChessBoard = React.createClass({
   }
 });
 
-var Cell = React.createClass({
+var Cells = React.createClass({
 
   propTypes: {
     grey: PropTypes.bool
   },
 
-  render: function() {
-    var grey = this.props.grey;
+  createCell: function(i) {
+    var x = i % 8;
+    var y = Math.floor(i / 8);
+    var grey = (x + y) % 2 === 1;
+
     var colour = grey ? "grey" : "white"
 
     return(
-      <div className= {colour}>
+      <div key={i} className={colour}>
         {this.props.children}
       </div>
+    );
+  },
+
+  render: function() {
+    var cells = []
+      for(var i=0; i<64; i++){
+        cells.push(this.createCell(i))
+      }
+      return(
+        <div>
+          {cells}
+        </div>
     );
   }
 });
@@ -58,9 +73,7 @@ var UnleaseChess = React.createClass({
       <div className="container">
         <Header />
         <ChessBoard>
-          <Cell grey>
-            <Knight position={[0, 0]}/>
-          </Cell>
+          <Cells />
         </ChessBoard>
       </div>
     );
