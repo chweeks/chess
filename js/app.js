@@ -2,32 +2,22 @@
 
 var PropTypes = React.PropTypes;
 
-var Header = React.createClass({
+var Knight = React.createClass({
+
   render: function() {
     return (
-      <header>
-        <h1>Unlease Chess</h1>
-      </header>
+      <img src="/public/images/knight.png" height="100%" width="100%"/>
     );
   }
 });
 
-var Knight = React.createClass({
+var ChessBoard = React.createClass({
   propTypes: {
-    position: PropTypes.arrayOf(PropTypes.number)
+    knightPosition: PropTypes.arrayOf(PropTypes.number)
   },
 
-  render: function() {
-    return (
-      <span><img src="/public/images/knight.png" height="80" width="80"/></span>
-    );
-  }
-});
-
-var Cells = React.createClass({
-
   startPosition: function(x, y) {
-    (x==0 && y==0) ? <Knight /> : null;
+    return (x==this.props.knightPosition[0] && y==this.props.knightPosition[1]) ? <Knight /> : null;
   },
 
   isGrey: function(x, y) {
@@ -45,9 +35,9 @@ var Cells = React.createClass({
     return (
       <div style={{ width: "100px",
                     height: "100px",
-                    paddingLeft: "6px",
-                    paddingTop: "5px",
-                    paddingRight: "10px",
+                    paddingLeft: "0px",
+                    paddingTop: "0px",
+                    paddingRight: "0px",
                     border: "solid",
                     borderWidth: "2px",
                     borderColor: "grey",
@@ -64,37 +54,14 @@ var Cells = React.createClass({
       cells.push(this.createCell(i))
     };
     return (
-      <div style={{width: '100%',
-                  height: '100%',
-                  display: 'flex',
-                  flexWrap: 'wrap'}}>
-        {cells}
-      </div>
-    );
-  }
-});
-
-var ChessBoard = React.createClass({
-  render: function() {
-    return (
-      <div className="board">
-        {this.props.children}
-      </div>
-    );
-  }
-});
-
-var UnleaseChess = React.createClass({
-  render: function() {
-    return (
       <div className="container">
-        <Header />
-        <ChessBoard>
-          <Cells />
-        </ChessBoard>
+        <div className="board">
+          {cells}
+          {this.props.children}
+        </div>
       </div>
     );
-  },
+  }
 });
 
-ReactDOM.render(<UnleaseChess />, document.getElementById('content'));
+ReactDOM.render(<ChessBoard knightPosition={[0,0]}/>, document.getElementById('content'));
