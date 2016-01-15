@@ -16,24 +16,9 @@ header{
 }
 
 .grey{
-  width: 100px;
-  height: 100px;
-  padding-left: 6px;
-  padding-top: 5px;
-  padding-right: 10px;
-  border: solid;
-  border-width: 2px;
-  border-color: grey;
   background-color: grey;
-  display: inline-flex;
 }
 
 .white{
-  width: 100px;
-  height: 100px;
-  border: solid;
-  border-width: 2px;
-  border-color: grey;
   background-color: white;
-  display: inline-flex;
 }

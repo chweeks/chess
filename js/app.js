@@ -12,32 +12,48 @@ var Header = React.createClass({
   }
 });
 
-var ChessBoard = React.createClass({
+var Knight = React.createClass({
+  propTypes: {
+    position: PropTypes.arrayOf(PropTypes.number)
+  },
+
   render: function() {
     return (
-      <div className="board">
-        {this.props.children}
-      </div>
+      <span><img src="/public/images/knight.png" height="80" width="80"/></span>
     );
   }
 });
 
 var Cells = React.createClass({
 
-  propTypes: {
-    grey: PropTypes.bool
+  startPosition: function(x, y) {
+    (x==0 && y==0) ? <Knight /> : null;
+  },
+
+  isGrey: function(x, y) {
+    var grey = (x + y) % 2 === 1;
+    return grey ? "grey" : "white";
   },
 
   createCell: function(i) {
     var x = i % 8;
     var y = Math.floor(i / 8);
-    var grey = (x + y) % 2 === 1;
 
-    var colour = grey ? "grey" : "white"
+    var colour = this.isGrey(x, y)
+    var knight = this.startPosition(x, y)
 
     return (
-      <div key={i} className={colour}>
-        {this.props.children}
+      <div style={{ width: "100px",
+                    height: "100px",
+                    paddingLeft: "6px",
+                    paddingTop: "5px",
+                    paddingRight: "10px",
+                    border: "solid",
+                    borderWidth: "2px",
+                    borderColor: "grey",
+                    display: "inline-flex",
+                    backgroundColor: colour}} key={i}>
+        {knight}
       </div>
     );
   },
@@ -48,21 +64,22 @@ var Cells = React.createClass({
       cells.push(this.createCell(i))
     };
     return (
-      <div>
+      <div style={{width: '100%',
+                  height: '100%',
+                  display: 'flex',
+                  flexWrap: 'wrap'}}>
         {cells}
       </div>
     );
   }
 });
 
-var Knight = React.createClass({
-  propTypes: {
-    position: PropTypes.arrayOf(PropTypes.number)
-  },
-
+var ChessBoard = React.createClass({
   render: function() {
     return (
-      <span><img src="/public/images/knight.png" height="80" width="80"/></span>
+      <div className="board">
+        {this.props.children}
+      </div>
     );
   }
 });
