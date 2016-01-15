@@ -6,7 +6,7 @@ var Knight = React.createClass({
 
   render: function() {
     return (
-      <img src="/public/images/knight.png" height="100%" width="100%"/>
+      <img id="knight" src="/public/images/knight.png" height="100%" width="100%"/>
     );
   }
 });
@@ -33,16 +33,16 @@ var ChessBoard = React.createClass({
     var knight = this.startPosition(x, y)
 
     return (
-      <div style={{ width: "100px",
-                    height: "100px",
-                    paddingLeft: "0px",
-                    paddingTop: "0px",
-                    paddingRight: "0px",
-                    border: "solid",
-                    borderWidth: "2px",
-                    borderColor: "grey",
-                    display: "inline-flex",
-                    backgroundColor: colour}} key={i}>
+      <div id="cell" style={{ width: "100px",
+                              height: "100px",
+                              paddingLeft: "0px",
+                              paddingTop: "0px",
+                              paddingRight: "0px",
+                              border: "solid",
+                              borderWidth: "2px",
+                              borderColor: "grey",
+                              display: "inline-flex",
+                              backgroundColor: colour}} key={i}>
         {knight}
       </div>
     );
@@ -54,14 +54,23 @@ var ChessBoard = React.createClass({
       cells.push(this.createCell(i))
     };
     return (
-      <div className="container">
-        <div className="board">
-          {cells}
-          {this.props.children}
-        </div>
+      <div className="board">
+        {cells}
+        {this.props.children}
       </div>
     );
   }
+});
+
+var UnleaseChess = React.createClass({
+
+  render: function() {
+    return (
+      <div className="container">
+        <ChessBoard />
+      </div>
+    );
+  },
 });
 
 ReactDOM.render(<ChessBoard knightPosition={[0,0]}/>, document.getElementById('content'));
