@@ -1,5 +1,43 @@
 'use strict';
 
+var knightPosition = [0, 0];
+var observer = null;
+
+function emitChange() {
+  observer(knightPosition);
+};
+
+function observe(o) {
+  if (observer) {
+    throw new Error('Multiple observers not implemented.');
+  }
+
+  observer = o;
+  emitChange();
+
+  return () => {
+    observer = null;
+  };
+};
+
+function moveKnight(newX, newY) {
+  knightPosition = [newX, newY];
+};
+
+function validMove(newX, newY) {
+
+  var x = knightPosition[0];
+  var y = knightPosition[1];
+
+  console.log(x);
+  console.log(y);
+  console.log(newX);
+  console.log(newY);
+
+  return ( (Math.abs(newX - x) == 2 && (Math.abs(newY - y) == 1)) ||
+           (Math.abs(newY - y) == 2 && (Math.abs(newX - x) == 1)) )
+};
+
 var Knight = React.createClass({
 
   render: function() {
@@ -51,12 +89,17 @@ var ChessBoard = React.createClass({
     var knightPiece = (x==knightX && y==knightY) ? <Knight /> : null
 
     return (
-      <div key={i}>
+      <div key={i} onClick={this.handleSquareClick.bind(this, x, y)}>
         <Cell grey={grey}>
           {knightPiece}
         </Cell>
       </div>
     );
+  },
+
+  handleSquareClick: function (newX, newY) {
+
+    validMove(newX, newY) ? moveKnight(newX, newY) : alert("You're a dumb ****");
   },
 
   render: function() {
@@ -79,4 +122,8 @@ var ChessBoard = React.createClass({
   }
 });
 
-ReactDOM.render(<ChessBoard knightPosition={[0,0]}/>, document.getElementById('content'));
+observe(function(knightPosition) {
+  ReactDOM.render(
+    <ChessBoard knightPosition={[0,0]}/>, document.getElementById('content')
+  )
+});
