@@ -1,6 +1,5 @@
 'use strict';
 
-var knightPosition = [0, 0];
 var observer = null;
 
 function emitChange() {
@@ -26,12 +25,8 @@ function validMove(newX, newY) {
   var x = knightPosition[0];
   var y = knightPosition[1];
 
-  function knightRules(newX, newY) {
-    return ( (Math.abs(newX - x) == 2 && (Math.abs(newY - y) == 1)) ||
-             (Math.abs(newY - y) == 2 && (Math.abs(newX - x) == 1)) )
-  }
-
-  return knightRules
+  return ( (Math.abs(newX - x) == 2 && (Math.abs(newY - y) == 1)) ||
+           (Math.abs(newY - y) == 2 && (Math.abs(newX - x) == 1)) )
 };
 
 var Knight = React.createClass({
@@ -74,6 +69,9 @@ var ChessBoard = React.createClass({
   },
 
   createCells: function(i) {
+
+    //  alternates grey and white cells and doubles up every 8 cells
+
     var x = i % 8;
     var y = Math.floor(i / 8);
     var grey = (x + y) % 2 === 1;
@@ -81,8 +79,7 @@ var ChessBoard = React.createClass({
     var knightX = this.props.knightPosition[0];
     var knightY = this.props.knightPosition[1];
 
-    // ^ alternates grey and white cells and doubles up every 8 cells
-
+    // renders Knight in assigned cell
     var knightPiece = (x==knightX && y==knightY) ? <Knight /> : null
 
     return (
@@ -118,6 +115,8 @@ var ChessBoard = React.createClass({
     )
   }
 });
+
+var knightPosition = [1, 0];
 
 observe(function(knightPosition) {
   ReactDOM.render(
